@@ -2,7 +2,6 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Footer from '../Pages/Footer/Footer';
 import Navbar from '../Pages/Navbar/Navbar';
-import Sidebar from '../Sidebar\'/Sidebar';
 import { FaUserCircle, FaUsers } from 'react-icons/fa';
 import { AiFillSetting } from 'react-icons/ai';
 import { FiShoppingBag } from 'react-icons/fi';
