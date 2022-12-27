@@ -3,6 +3,7 @@ import Main from "../Layout/Main";
 import Friends from "../Pages/Friends/Friends";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
+import Messages from "../Pages/Messages/Messages";
 import Notifications from "../Pages/Notifications/Notifications";
 import Signup from "../Pages/SignUp/Signup";
 
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
         {
             path: '/notifications',
             element: <Notifications />,
+        },
+        {
+            path: '/message',
+            element: <Messages />,
         }]
     },
     {

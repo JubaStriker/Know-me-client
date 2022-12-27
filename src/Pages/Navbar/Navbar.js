@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai'
 import { BsFillPeopleFill } from 'react-icons/bs'
 import { RiNotification2Fill, RiSearchLine, RiMessage2Fill } from 'react-icons/ri'
@@ -29,20 +29,37 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
-                <Link to='/home' className="btn glass btn-primary normal-case text-xl font-mono font-bold">Know ME</Link>
+                <Link to='/home' className="btn glass btn-primary normal-case text-xl font-mono font-bold">Seewe</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    <li><Link to='/home'><h1 className='text-4xl hover:text-white' title='Home'><AiFillHome /></h1></Link></li>
+                    <li><NavLink
+                        to="/home"
+                        className={({ isActive }) =>
+                            isActive ? 'text-4xl text-white border-b-4' : 'text-4xl hover:text-white'
+                        }><h1 className='text-4xl hover:text-white' title='Home'><AiFillHome /></h1></NavLink></li>
                     <li>
-                        <Link to='/friends'><h1 className='text-4xl hover:text-white' title='Friends'><BsFillPeopleFill /></h1></Link>
+                        <NavLink
+                            to="/friends"
+                            className={({ isActive }) =>
+                                isActive ? 'text-4xl text-white border-b-4' : 'text-4xl hover:text-white'
+                            }><h1 className='text-4xl hover:text-white' title='Friends'><BsFillPeopleFill /></h1></NavLink>
                     </li>
                     <li>
-                        <Link to='/notifications'><h1 className='text-4xl hover:text-white' title='Notifications'><RiNotification2Fill /></h1></Link>
+                        <NavLink
+                            to="/notifications"
+                            className={({ isActive }) =>
+                                isActive ? 'text-4xl text-white border-b-4' : 'text-4xl hover:text-white'
+                            }><h1 className='text-4xl hover:text-white' title='Notifications'><RiNotification2Fill /></h1></NavLink>
                     </li>
                     <li className='indicator'>
-                        <h1 className='text-4xl hover:text-white' title='Messages'><RiMessage2Fill /></h1>
-                        <span className="indicator-item badge badge-secondary">9+</span>
+                        <NavLink
+                            to="/message"
+                            className={({ isActive }) =>
+                                isActive ? 'text-4xl text-white border-b-4' : 'text-4xl hover:text-white'
+                            }>
+                            <h1 className='text-4xl hover:text-white' title='Messages'><RiMessage2Fill /></h1>
+                        </NavLink>
                     </li>
                     <li className="form-control flex items-center">
                         <h1 className='text-4xl hover:text-white' title='Find'><RiSearchLine /></h1>

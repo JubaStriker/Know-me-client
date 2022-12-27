@@ -1,24 +1,37 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import loginImg from '../../Assets/login.png'
 import { FcGoogle } from 'react-icons/fc'
-
-const handleOnSubmit = event => {
-    event.preventDefault();
-    const form = event.target;
-    const email = form.email.value;
-    const password = form.password.value;
-
-    console.log(email, password);
-};
+import { Player } from '@lottiefiles/react-lottie-player';
+import { AuthContext } from '../../Context/AuthProvider';
 
 
 const Signup = () => {
+
+    const { createUser, updateUser, providerLogin } = useContext(AuthContext)
+
+    const handleOnSubmit = event => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        const name = form.name.value;
+
+        createUser(email, password)
+            .then()
+    };
+
+
     return (
-        <div className="hero min-h-screen bg-base-200">
+        <div className="hero min-h-screen bg-base-200 pt-10">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
-                    <img src={loginImg} alt="social connect" className='h-96 w-80' />
+                    <Player
+                        src='https://assets5.lottiefiles.com/packages/lf20_kdCeeh2u4M.json'
+                        className="player"
+                        loop
+                        autoplay
+                        style={{ height: '400px', width: '400px' }}
+                    />
                 </div>
                 <div>
                     <div className="text-center lg:text-left">
