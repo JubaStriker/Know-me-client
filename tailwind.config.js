@@ -28,6 +28,8 @@ module.exports = {
           "warning": "#DEA517",
 
           "error": "#E7665F",
+
+          "decoration": "#fbbc05"
         },
       },
     ],

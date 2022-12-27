@@ -40,8 +40,9 @@ const Navbar = () => {
                     <li>
                         <Link to='/notifications'><h1 className='text-4xl hover:text-white' title='Notifications'><RiNotification2Fill /></h1></Link>
                     </li>
-                    <li>
+                    <li className='indicator'>
                         <h1 className='text-4xl hover:text-white' title='Messages'><RiMessage2Fill /></h1>
+                        <span className="indicator-item badge badge-secondary">9+</span>
                     </li>
                     <li className="form-control flex items-center">
                         <h1 className='text-4xl hover:text-white' title='Find'><RiSearchLine /></h1>
