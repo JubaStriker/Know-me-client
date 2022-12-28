@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import Footer from '../Pages/Footer/Footer';
 import Navbar from '../Pages/Navbar/Navbar';
@@ -9,8 +9,17 @@ import { RiPagesFill, RiVideoFill } from 'react-icons/ri';
 import { HiOutlineTrendingUp } from 'react-icons/hi';
 import { RiLogoutCircleRFill } from 'react-icons/ri';
 import { BsFillCalendar2EventFill, BsFillBookmarkStarFill } from 'react-icons/bs';
+import { AuthContext } from '../Context/AuthProvider';
 
 const Main = () => {
+
+    const { logOut } = useContext(AuthContext)
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
     return (
         <div>
             <Navbar />
@@ -62,7 +71,7 @@ const Main = () => {
                             <h1 className='text-3xl hover:text-white' title='Home'><AiFillSetting /><span className='text-xl'>Settings</span></h1>
                         </li>
                         <li>
-                            <h1 className='text-3xl hover:text-white' title='Home'><RiLogoutCircleRFill /><span className='text-xl'>Log out</span></h1>
+                            <h1 className='text-3xl hover:text-white' title='Home'><RiLogoutCircleRFill /><span onClick={handleLogOut} className='text-xl'>Log out</span></h1>
                         </li>
                     </ul>
 

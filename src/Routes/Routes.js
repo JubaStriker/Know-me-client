@@ -7,11 +7,12 @@ import Messages from "../Pages/Messages/Messages";
 import Notifications from "../Pages/Notifications/Notifications";
 import Profile from "../Pages/Profile/Profile";
 import Signup from "../Pages/SignUp/Signup";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
         path: '/',
-        element: <Main />,
+        element: <PrivateRoute><Main /></PrivateRoute>,
         children: [{
             path: '/',
             element: <Home />,

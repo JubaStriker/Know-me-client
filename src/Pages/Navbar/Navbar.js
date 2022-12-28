@@ -3,10 +3,11 @@ import { Link, NavLink } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai'
 import { BsFillPeopleFill } from 'react-icons/bs'
 import { RiNotification2Fill, RiSearchLine, RiMessage2Fill } from 'react-icons/ri'
+import logo from '../../Assets/logo black.png'
 
 const Navbar = () => {
     return (
-        <div className="navbar bg-primary">
+        <div className="navbar bg-primary shadow-md">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -18,7 +19,7 @@ const Navbar = () => {
                             <h1 className='text-4xl hover:text-white' title='Friends'><BsFillPeopleFill /> <span className='text-2xl'>Home</span></h1>
                         </li>
                         <li>
-                            <h1 className='text-4xl hover:text-white' title='Notificatons'><RiNotification2Fill />  <span className='text-2xl'>Notification</span></h1>
+                            <h1 className='text-4xl hover:text-white' title='Notifications'><RiNotification2Fill />  <span className='text-2xl'>Notification</span></h1>
                         </li>
                         <li>
                             <h1 className='text-4xl hover:text-white' title='Messages'><RiMessage2Fill />  <span className='text-2xl'>Messages</span></h1>
@@ -29,7 +30,9 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
-                <Link to='/home' className="btn glass btn-primary normal-case text-xl font-mono font-bold">SeeWe</Link>
+                <Link to='/home' >
+                    <img src={logo} alt="logo" className="h-14 w-28" />
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
