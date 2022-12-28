@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import Footer from '../Pages/Footer/Footer';
 import Navbar from '../Pages/Navbar/Navbar';
 import { FaUserCircle, FaUsers } from 'react-icons/fa';
@@ -24,9 +24,19 @@ const Main = () => {
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-[#80f46b61] text-base-content">
                         {/* <!-- Sidebar content here --> */}
+
                         <li>
-                            <h1 className='text-3xl hover:text-white' title='Home'><FaUserCircle /><span className='text-xl'>Profile</span></h1>
+                            <NavLink
+                                to="/profile"
+                                className={({ isActive }) =>
+                                    isActive ? 'text-4xl text-blue-600' : 'text-4xl hover:text-white'
+                                }><div className='text-4xl hover:text-white flex items-center gap-3' title='Home'>
+                                    <div><FaUserCircle /></div>
+                                    <div className='text-xl'>Profile</div>
+                                </div>
+                            </NavLink>
                         </li>
+
                         <li>
                             <h1 className='text-3xl hover:text-white' title='Home'><FaUsers /><span className='text-xl'>Groups</span></h1>
                         </li>

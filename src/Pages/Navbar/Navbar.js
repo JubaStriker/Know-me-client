@@ -33,11 +33,14 @@ const Navbar = () => {
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    <li><NavLink
-                        to="/home"
-                        className={({ isActive }) =>
-                            isActive ? 'text-4xl text-white border-b-4' : 'text-4xl hover:text-white'
-                        }><h1 className='text-4xl hover:text-white' title='Home'><AiFillHome /></h1></NavLink></li>
+                    <li>
+                        <NavLink
+                            to="/home"
+                            className={({ isActive }) =>
+                                isActive ? 'text-4xl text-white border-b-4' : 'text-4xl hover:text-white'
+                            }><h1 className='text-4xl hover:text-white' title='Home'><AiFillHome /></h1>
+                        </NavLink>
+                    </li>
                     <li>
                         <NavLink
                             to="/friends"
