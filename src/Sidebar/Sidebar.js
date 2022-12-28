@@ -17,10 +17,10 @@ const Sidebar = () => {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-80 bg-[#80f46b61] text-base-content">
+                <ul className="menu p-4 w-80 text-base-content">
                     {/* <!-- Sidebar content here --> */}
                     <li>
-                        <h1 className='text-3xl hover:text-white' title='Home'><FaUserCircle /><span className='text-xl'>Profile</span></h1>
+                        <h1 className='text-3xl hover:text-white' title='Home'><FaUserCircle /><span className='text-xl'>About</span></h1>
                     </li>
                     <li>
                         <h1 className='text-3xl hover:text-white' title='Home'><FaUsers /><span className='text-xl'>Groups</span></h1>

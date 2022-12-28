@@ -31,7 +31,7 @@ const Main = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 bg-[#80f46b61] text-base-content">
+                    <ul className="menu p-4 w-80 bg-base-100 lg:bg-inherit text-base-content">
                         {/* <!-- Sidebar content here --> */}
 
                         <li>
@@ -41,7 +41,7 @@ const Main = () => {
                                     isActive ? 'text-4xl text-blue-600' : 'text-4xl hover:text-white'
                                 }><div className='text-4xl hover:text-white flex items-center gap-3' title='Home'>
                                     <div><FaUserCircle /></div>
-                                    <div className='text-xl'>Profile</div>
+                                    <div className='text-xl'>About</div>
                                 </div>
                             </NavLink>
                         </li>
