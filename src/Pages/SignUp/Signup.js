@@ -1,14 +1,19 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc'
 import { Player } from '@lottiefiles/react-lottie-player';
 import { AuthContext } from '../../Context/AuthProvider';
+import Loading from '../Loading/Loading';
 
 
 const Signup = () => {
 
     const { createUser, updateUser, providerLogin } = useContext(AuthContext)
     const [page1, setPage1] = useState(true)
+    const [loading, setIsLoading] = useState(false)
+    const navigate = useNavigate()
+    const imageHostKey = process.env.REACT_APP_imagebb_key
+
 
     const handleOnSubmit = event => {
         event.preventDefault();
@@ -21,15 +26,67 @@ const Signup = () => {
         const hometown = form.hometown.value;
         const relationshipStatus = form.relationshipStatus.value;
         const profilePicture = form.profilePicture.files[0];
-        const coverPhoto = form.coverPhoto.files[0];
+        const formData = new FormData();
+        formData.append('image', profilePicture);
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
 
-        console.log(email, password, name, gender, age, hometown, relationshipStatus, profilePicture, coverPhoto);
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imageData => {
+                setIsLoading(true)
+                const photoURL = imageData.data.url;
+                createUser(email, password)
+                    .then(result => {
+                        const user = result.user
+                        console.log(user);
+                    })
+                const userInfo = {
+                    displayName: name, photoURL: photoURL
+                }
+                updateUser(userInfo)
+                    .then(() => {
+                        saveUser(name, gender, age, hometown, relationshipStatus, photoURL)
+                    })
+
+            });
 
 
+        const saveUser = (name, gender, age, hometown, relationshipStatus, photoURL) => {
+            const user = {
+                name: name,
+                email,
+                age: age,
+                gender: gender,
+                hometown: hometown,
+                relationshipStatus: relationshipStatus,
+                profilePicture: photoURL
+            }
 
-        createUser(email, password)
-            .then()
+            fetch('http://localhost:5000/users', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setIsLoading(false)
+                    navigate('/')
+                    console.log(data);
+                    console.log(user);
+                })
+        }
+
+
     };
+
+    if (loading) {
+        return <Loading />
+    }
 
 
     return (
@@ -144,7 +201,7 @@ const Signup = () => {
                                 <span className="label-text">Cover photo</span>
                             </label>
                             <input type="file" name="coverPhoto"
-                                required
+
                                 className="input w-full max-w-xs" />
                         </div>
                         <div className="form-control mt-6">
