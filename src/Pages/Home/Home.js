@@ -1,9 +1,14 @@
 import React from 'react';
+import Feed from './Feed';
+import Post from './Post';
 const Home = () => {
     return (
         <div>
-            This is Home
-
+            <Post></Post>
+            <Feed />
+            <Feed />
+            <Feed />
+            <Feed />
         </div>
     );
 };

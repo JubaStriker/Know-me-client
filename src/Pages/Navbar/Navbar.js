@@ -14,16 +14,51 @@ const Navbar = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-primary rounded-box w-52">
-                        <li><h1 className='text-4xl hover:text-white' title='Home'><AiFillHome /><span className='text-2xl'>Home</span></h1></li>
                         <li>
-                            <h1 className='text-4xl hover:text-white' title='Friends'><BsFillPeopleFill /> <span className='text-2xl'>Home</span></h1>
+                            <Link to='/home'>
+                                <div className='flex items-center gap-3'>
+                                    <h1 className='text-3xl hover:text-white' title='Home'><AiFillHome /></h1>
+                                    <div className='text-2xl'>
+                                        Home
+                                    </div>
+                                </div>
+
+                            </Link>
                         </li>
                         <li>
-                            <h1 className='text-4xl hover:text-white' title='Notifications'><RiNotification2Fill />  <span className='text-2xl'>Notification</span></h1>
+                            <Link to='/friends'>
+                                <div className='flex items-center gap-3'>
+                                    <h1 className='text-3xl hover:text-white' title='Home'><BsFillPeopleFill /> </h1>
+                                    <div className='text-2xl'>
+                                        People
+                                    </div>
+                                </div>
+
+                            </Link>
                         </li>
                         <li>
-                            <h1 className='text-4xl hover:text-white' title='Messages'><RiMessage2Fill />  <span className='text-2xl'>Messages</span></h1>
+                            <Link to='/notifications'>
+                                <div className='flex items-center gap-3'>
+                                    <h1 className='text-3xl hover:text-white' title='Home'><RiNotification2Fill /> </h1>
+                                    <div className='text-2xl'>
+                                        Notification
+                                    </div>
+                                </div>
+
+                            </Link>
                         </li>
+                        <li>
+                            <Link to='/message'>
+                                <div className='flex items-center gap-3'>
+                                    <h1 className='text-3xl hover:text-white' title='messages'><RiMessage2Fill />   </h1>
+                                    <div className='text-2xl'>
+                                        Messages
+                                    </div>
+                                </div>
+
+                            </Link>
+                        </li>
+
                         <li className="form-control flex">
                             <h1 className='text-4xl hover:text-white' title='Find'><RiSearchLine /> <span className='text-2xl'>Find</span></h1>
                             <input type="text" placeholder="Search" className="input input-bordered h-10 w-48" />
@@ -74,7 +109,9 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                </label>
 
             </div>
         </div>
