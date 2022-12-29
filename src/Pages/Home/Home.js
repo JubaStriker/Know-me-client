@@ -6,9 +6,6 @@ const Home = () => {
         <div>
             <Post></Post>
             <Feed />
-            <Feed />
-            <Feed />
-            <Feed />
         </div>
     );
 };

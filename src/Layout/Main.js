@@ -38,8 +38,8 @@ const Main = () => {
                             <NavLink
                                 to="/profile"
                                 className={({ isActive }) =>
-                                    isActive ? 'text-4xl text-blue-600' : 'text-4xl hover:text-white'
-                                }><div className='text-4xl hover:text-white flex items-center gap-3' title='Home'>
+                                    isActive ? 'text-4xl text-blue-600' : 'text-4xl hover:text-blue-600'
+                                }><div className='text-4xl hover:text-blue-600 flex items-center gap-3' title='Home'>
                                     <div><FaUserCircle /></div>
                                     <div className='text-xl'>About</div>
                                 </div>
@@ -47,31 +47,31 @@ const Main = () => {
                         </li>
 
                         <li>
-                            <h1 className='text-3xl hover:text-white' title='Home'><FaUsers /><span className='text-xl'>Groups</span></h1>
+                            <h1 className='text-3xl hover:text-blue-600' title='Home'><FaUsers /><span className='text-xl'>Groups</span></h1>
                         </li>
                         <li>
-                            <h1 className='text-3xl hover:text-white' title='Home'><RiPagesFill /><span className='text-xl'>Pages</span></h1>
+                            <h1 className='text-3xl hover:text-blue-600' title='Home'><RiPagesFill /><span className='text-xl'>Pages</span></h1>
                         </li>
                         <li>
-                            <h1 className='text-3xl hover:text-white' title='Home'><HiOutlineTrendingUp /><span className='text-xl'>Trending</span></h1>
+                            <h1 className='text-3xl hover:text-blue-600' title='Home'><HiOutlineTrendingUp /><span className='text-xl'>Trending</span></h1>
                         </li>
                         <li>
-                            <h1 className='text-3xl hover:text-white' title='Home'><RiVideoFill /><span className='text-xl'>Videos</span></h1>
+                            <h1 className='text-3xl hover:text-blue-600' title='Home'><RiVideoFill /><span className='text-xl'>Videos</span></h1>
                         </li>
                         <li>
-                            <h1 className='text-2xl hover:text-white' title='Home'><BsFillCalendar2EventFill /><span className='text-xl'>Events</span></h1>
+                            <h1 className='text-2xl hover:text-blue-600' title='Home'><BsFillCalendar2EventFill /><span className='text-xl'>Events</span></h1>
                         </li>
                         <li>
-                            <h1 className='text-3xl hover:text-white' title='Home'><FiShoppingBag /><span className='text-xl'>Marketplace</span></h1>
+                            <h1 className='text-3xl hover:text-blue-600' title='Home'><FiShoppingBag /><span className='text-xl'>Marketplace</span></h1>
                         </li>
                         <li>
-                            <h1 className='text-3xl hover:text-white' title='Home'><BsFillBookmarkStarFill /><span className='text-xl'>Saved</span></h1>
+                            <h1 className='text-3xl hover:text-blue-600' title='Home'><BsFillBookmarkStarFill /><span className='text-xl'>Saved</span></h1>
                         </li>
                         <li>
-                            <h1 className='text-3xl hover:text-white' title='Home'><AiFillSetting /><span className='text-xl'>Settings</span></h1>
+                            <h1 className='text-3xl hover:text-blue-600' title='Home'><AiFillSetting /><span className='text-xl'>Settings</span></h1>
                         </li>
                         <li>
-                            <h1 className='text-3xl hover:text-white' title='Home'><RiLogoutCircleRFill /><span onClick={handleLogOut} className='text-xl'>Log out</span></h1>
+                            <h1 className='text-3xl hover:text-blue-600' title='Home'><RiLogoutCircleRFill /><span onClick={handleLogOut} className='text-xl'>Log out</span></h1>
                         </li>
                     </ul>
 
