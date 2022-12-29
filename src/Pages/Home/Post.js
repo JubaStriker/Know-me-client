@@ -78,30 +78,6 @@ const Post = () => {
                 .then(data => { console.log(data) })
         }
 
-        // fetch(`http://localhost:5000/post`, {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(post)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => { console.log(data) })
-
-
-        // fetch(url, {
-        //     method: 'POST',
-        //     body: formData
-        // })
-        //     .then(res => res.json())
-        //     .then(imageData => {
-        //         const photo = imageData.data.url;
-        //     });
-
-
-
-
-
     };
 
     return (
@@ -120,7 +96,7 @@ const Post = () => {
                 <div className='flex flex-col md:flex-row'>
                     <div>
                         <div className='mx-4'>
-                            <textarea className='rounded-lg p-2' name="status" id="" cols="40" rows="3" defaultValue="What's on your mind?"></textarea>
+                            <textarea className='rounded-lg p-2' name="status" id="" cols="40" rows="3" placeholder="What's on your mind?"></textarea>
                         </div>
                     </div>
                     <div className='mx-4'>
