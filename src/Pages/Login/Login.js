@@ -4,10 +4,13 @@ import loginImg from '../../Assets/login.png'
 import { FcGoogle } from 'react-icons/fc'
 import { AuthContext } from '../../Context/AuthProvider';
 import logo from '../../Assets/logo white.png'
+import { GoogleAuthProvider } from 'firebase/auth';
+import { toast } from 'react-hot-toast';
 
 const Login = () => {
 
-    const { signIn } = useContext(AuthContext)
+    const { signIn, providerLogin } = useContext(AuthContext)
+    const googleProvider = new GoogleAuthProvider()
     const [signInError, setSignInError] = useState("")
     const location = useLocation()
     const navigate = useNavigate()
@@ -31,6 +34,48 @@ const Login = () => {
             });
 
     };
+
+    const handleGoogleLogin = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                const name = user.displayName;
+                const email = user.email;
+                const profilePicture = user.photoURL;
+
+                saveGUser(name, email, profilePicture)
+                setSignInError('');
+                toast.success("User created successfully")
+                navigate(from, { replace: true });
+
+            })
+            .catch(error => {
+                console.error('Error', error);
+                setSignInError(error.message);
+            });
+    }
+
+    const saveGUser = (name, email, profilePicture) => {
+        const user = {
+            name: name,
+            email: email,
+            profilePicture: profilePicture
+        }
+
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                toast.success("User created successfully")
+                navigate('/')
+            })
+    }
+
 
     return (
 
@@ -77,7 +122,7 @@ const Login = () => {
                                     </div>
                                     <div className="divider">OR</div>
                                     <div className="form-control mt-1">
-                                        <button type='submit' className="btn bg-white text-orange-400"><FcGoogle className='text-2xl mr-2' />  Sign in with Google</button>
+                                        <button onClick={handleGoogleLogin} className="btn bg-white text-orange-400"><FcGoogle className='text-2xl mr-2' />  Sign in with Google</button>
                                     </div>
                                 </div>
                             </form>

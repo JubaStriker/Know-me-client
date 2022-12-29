@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../Context/AuthProvider';
+import Loading from '../Loading/Loading';
 
 const Post = () => {
 
     const { user } = useContext(AuthContext)
     const [userInfo, setUserInfo] = useState({})
-    const imageHostKey = process.env.REACT_APP_imagebb_key
+    const imageHostKey = process.env.REACT_APP_imagebb_key;
+    const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
@@ -28,13 +31,13 @@ const Post = () => {
 
 
         if (photo) {
-            console.log('has photo');
             fetch(url, {
                 method: 'POST',
                 body: formData
             })
                 .then(res => res.json())
                 .then(imageData => {
+                    setLoading(true);
                     const photo = imageData.data.url;
                     const post = {
                         name: userInfo.name,
@@ -42,7 +45,8 @@ const Post = () => {
                         profilePicture: userInfo.profilePicture,
                         like: 0,
                         status: status,
-                        photo: photo
+                        photo: photo,
+                        comment: []
                     }
                     fetch(`http://localhost:5000/post`, {
                         method: 'POST',
@@ -52,7 +56,14 @@ const Post = () => {
                         body: JSON.stringify(post)
                     })
                         .then(res => res.json())
-                        .then(data => { console.log(data) })
+                        .then(data => {
+                            console.log(data)
+                            setLoading(false)
+                            if (data.acknowledged === true) {
+                                toast.success("Status updated")
+                                window.location.reload()
+                            }
+                        })
 
                 });
 
@@ -65,6 +76,7 @@ const Post = () => {
                 profilePicture: userInfo.profilePicture,
                 like: 0,
                 status: status,
+                comment: []
             }
 
             fetch(`http://localhost:5000/post`, {
@@ -74,11 +86,25 @@ const Post = () => {
                 },
                 body: JSON.stringify(post)
             })
-                .then(res => res.json())
-                .then(data => { console.log(data) })
+                .then(res => {
+                    res.json()
+                })
+                .then(data => {
+                    console.log(data)
+                    toast.success("Status updated")
+                    setLoading(false)
+                    if (data.acknowledged === "true") {
+                        toast.success("Status updated")
+                        window.location.reload()
+                    }
+                })
         }
 
     };
+
+    if (loading) {
+        return <Loading></Loading>
+    }
 
     return (
         <div className=' bg-base-200 mx-6 my-3 py-2 rounded-lg'>

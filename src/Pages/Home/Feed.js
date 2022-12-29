@@ -15,7 +15,7 @@ const Feed = () => {
                 setFeeds(data);
             })
     }, [user.email])
-    console.log(feeds);
+
 
     return (
         <div>

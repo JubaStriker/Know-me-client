@@ -1,5 +1,5 @@
-import userEvent from '@testing-library/user-event';
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { FaRegComment } from 'react-icons/fa'
 import { AuthContext } from '../../Context/AuthProvider';
@@ -43,13 +43,13 @@ const FeedElement = ({ feed }) => {
             body: JSON.stringify(comment)
         })
             .then(res => res.json())
-            .then(data => { console.log(data) })
+            .then(data => {
+                console.log(data)
+                toast.success("Comment posted successfully")
+                window.location.reload()
+            })
 
     }
-
-
-
-    console.log(feed);
 
 
     return (
@@ -64,7 +64,7 @@ const FeedElement = ({ feed }) => {
                     <h1 className='text-xl font-bold'>{feed.name}</h1>
                 </div>
             </div>
-            <div className='px-10 py-2 md:px-16 md:py-3'>
+            <div className='px-10 py-2 md:px-16 md:py-3 text-md'>
                 {feed.status}
             </div>
             <div>
@@ -78,6 +78,7 @@ const FeedElement = ({ feed }) => {
                 <button onClick={() => setComment(!comment)}><FaRegComment className='text-2xl' /></button>
             </div>
             <div>
+                <h1 className='mx-2'>Comments</h1>
                 {feed?.comment?.map(c =>
                     <div className='border m-2 bg-slate-100 max-w-3xl rounded-lg'>
                         <div className='flex justify-start items-center'>

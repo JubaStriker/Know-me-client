@@ -19,35 +19,60 @@ const EditModal = ({ userInfo }) => {
         formData.append('image', profilePicture);
         const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
 
-        fetch(url, {
-            method: 'POST',
-            body: formData
-        })
-            .then(res => res.json())
-            .then(imageData => {
-                const photoURL = imageData.data.url;
-                console.log(photoURL);
-                const user = {
-                    name: name,
-                    email: email,
-                    age: age,
-                    gender: gender,
-                    education: education,
-                    hometown: hometown,
-                    relationshipStatus: relationshipStatus,
-                    profilePicture: photoURL
-                }
-                fetch(`http://localhost:5000/users?email=${userInfo.email}`, {
-                    method: 'PUT',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(user)
-                })
-                    .then(res => res.json())
-                    .then(data => { console.log(data) })
+        if (profilePicture) {
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => res.json())
+                .then(imageData => {
+                    const photoURL = imageData.data.url;
+                    console.log(photoURL);
+                    const user = {
+                        name: name,
+                        email: email,
+                        age: age,
+                        gender: gender,
+                        education: education,
+                        hometown: hometown,
+                        relationshipStatus: relationshipStatus,
+                        profilePicture: photoURL
+                    }
+                    fetch(`http://localhost:5000/users?email=${userInfo.email}`, {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(user)
+                    })
+                        .then(res => res.json())
+                        .then(data => { console.log(data) })
 
-            });
+                });
+        }
+        else {
+            const profilePicture = userInfo.profilePicture
+            const user = {
+                name: name,
+                email: email,
+                age: age,
+                gender: gender,
+                education: education,
+                hometown: hometown,
+                relationshipStatus: relationshipStatus,
+                profilePicture: profilePicture
+            }
+            fetch(`http://localhost:5000/users?email=${userInfo.email}`, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+                .then(res => res.json())
+                .then(data => { console.log(data) })
+        }
+
 
 
 

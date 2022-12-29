@@ -70,8 +70,8 @@ const Main = () => {
                         <li>
                             <h1 className='text-3xl hover:text-blue-600' title='Home'><AiFillSetting /><span className='text-xl'>Settings</span></h1>
                         </li>
-                        <li>
-                            <h1 className='text-3xl hover:text-blue-600' title='Home'><RiLogoutCircleRFill /><span onClick={handleLogOut} className='text-xl'>Log out</span></h1>
+                        <li onClick={handleLogOut}>
+                            <h1 className='text-3xl hover:text-blue-600' title='Home'><RiLogoutCircleRFill /><span className='text-xl'>Log out</span></h1>
                         </li>
                     </ul>
 

@@ -4,6 +4,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { Player } from '@lottiefiles/react-lottie-player';
 import { AuthContext } from '../../Context/AuthProvider';
 import Loading from '../Loading/Loading';
+import { toast } from 'react-hot-toast';
 
 
 const Signup = () => {
@@ -75,9 +76,8 @@ const Signup = () => {
                 .then(res => res.json())
                 .then(data => {
                     setIsLoading(false)
+                    toast.success("Signup successful")
                     navigate('/')
-                    console.log(data);
-                    console.log(user);
                 })
         }
 
