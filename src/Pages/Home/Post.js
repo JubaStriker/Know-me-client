@@ -122,7 +122,7 @@ const Post = () => {
                 <div className='flex flex-col md:flex-row'>
                     <div>
                         <div className='mx-4'>
-                            <textarea className='rounded-lg p-2' name="status" id="" cols="40" rows="3" placeholder="What's on your mind?"></textarea>
+                            <textarea className='rounded-lg p-2 w-72' name="status" id="" cols="40" rows="3" placeholder="What's on your mind?"></textarea>
                         </div>
                     </div>
                     <div className='mx-4'>

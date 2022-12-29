@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-hot-toast';
 
 const EditModal = ({ userInfo }) => {
 
@@ -46,7 +47,10 @@ const EditModal = ({ userInfo }) => {
                         body: JSON.stringify(user)
                     })
                         .then(res => res.json())
-                        .then(data => { console.log(data) })
+                        .then(data => {
+                            toast.success("Profile updated successfully")
+                            window.location.reload()
+                        })
 
                 });
         }
@@ -70,39 +74,13 @@ const EditModal = ({ userInfo }) => {
                 body: JSON.stringify(user)
             })
                 .then(res => res.json())
-                .then(data => { console.log(data) })
+                .then(data => {
+                    toast.success("Profile updated successfully")
+                    window.location.reload()
+                })
         }
-
-
-
-
     };
 
-
-
-
-    // const handleUpdate = (name, email, gender, age, hometown, relationshipStatus, photoURL, education) => {
-
-    // const user = {
-    //     name: name,
-    //     email: email,
-    //     age: age,
-    //     gender: gender,
-    //     education: education,
-    //     hometown: hometown,
-    //     relationshipStatus: relationshipStatus,
-    //     profilePicture: photoURL
-    // }
-    // fetch(`http://localhost:5000/users?email=${user.email}`, {
-    //     method: 'PUT',
-    //     headers: {
-    //         'content-type': 'application/json'
-    //     },
-    //     body: JSON.stringify(user)
-    // })
-    //     .then(res => res.json())
-    //     .then(data => { console.log(data) })
-    // }
 
     return (
         <div>
@@ -138,9 +116,8 @@ const EditModal = ({ userInfo }) => {
                             <select className="select select-bordered w-full max-w-lg"
                                 name="gender"
                                 defaultValue={userInfo.gender}
-                                required>
-
-                                <option>Male</option>
+                                disabled>
+                                <option>{userInfo.gender}</option>
                                 <option>Female</option>
                                 <option>Prefer not to say</option>
                             </select>
@@ -161,7 +138,7 @@ const EditModal = ({ userInfo }) => {
                             <label className="label">
                                 <span className="label-text">Education</span>
                             </label>
-                            <input type="text" name='education' placeholder="add school/college" className="input input-bordered" />
+                            <input type="text" name='education' defaultValue={userInfo.education} placeholder="add school/college" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">

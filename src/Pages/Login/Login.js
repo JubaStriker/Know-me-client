@@ -71,7 +71,7 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
-                toast.success("User created successfully")
+                toast.success("Login successful")
                 navigate('/')
             })
     }
