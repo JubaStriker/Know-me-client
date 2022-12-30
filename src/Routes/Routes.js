@@ -5,6 +5,7 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Messages from "../Pages/Messages/Messages";
 import Notifications from "../Pages/Notifications/Notifications";
+import PostDetails from "../Pages/PostDetails/PostDetails";
 import Profile from "../Pages/Profile/Profile";
 import Signup from "../Pages/SignUp/Signup";
 import PrivateRoute from "./PrivateRoute";
@@ -36,6 +37,11 @@ export const router = createBrowserRouter([
         {
             path: '/profile',
             element: <Profile />,
+        },
+        {
+            path: '/details/:id',
+            element: <PostDetails />,
+            loader: ({ params }) => fetch(`https://know-me-server.vercel.app/post/${params.id}`)
         }]
     },
     {

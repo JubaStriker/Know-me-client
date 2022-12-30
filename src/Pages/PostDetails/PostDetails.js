@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { FaRegComment } from 'react-icons/fa'
-import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
-const FeedElement = ({ feed, react, setReact }) => {
+const PostDetails = () => {
+
+    const feed = useLoaderData()
 
     const { user } = useContext(AuthContext)
     const [userInfo, setUserInfo] = useState({})
-    const like = feed.like
 
     useEffect(() => {
         fetch(`https://know-me-server.vercel.app/users?email=${user.email}`)
@@ -18,7 +19,6 @@ const FeedElement = ({ feed, react, setReact }) => {
                 setUserInfo(data)
             })
     }, [user.email])
-
     const [love, setLove] = useState(true);
     const [comment, setComment] = useState(false);
 
@@ -47,10 +47,10 @@ const FeedElement = ({ feed, react, setReact }) => {
             .then(res => res.json())
             .then(data => {
                 toast.success("Comment posted successfully")
+                window.location.reload()
             })
 
     }
-
     const likeHandler = (like) => {
         setLove(!love)
         const newSLike = like + 1;
@@ -67,32 +67,8 @@ const FeedElement = ({ feed, react, setReact }) => {
         })
             .then(res => res.json())
             .then(data => {
-                setReact(react + 1)
                 toast.success("Post liked")
             })
-    }
-
-    const dislikeHandler = (like) => {
-        if (like > 0) {
-            setLove(!love)
-            const newSLike = like - 1;
-            const newLike = { like: newSLike }
-            fetch(`https://know-me-server.vercel.app/like/${feed._id}`, {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(newLike)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    toast.success("Post disliked")
-                    setReact(react + 1)
-                })
-        }
-
-
     }
 
 
@@ -112,37 +88,19 @@ const FeedElement = ({ feed, react, setReact }) => {
                 {feed.status}
             </div>
             <div>
-                <Link to={`/details/${feed._id}`}><button className='mx-16 btn btn-sm btn-primary'>Details</button></Link>
-
-            </div>
-            <div>
                 <img src={feed.photo} alt="" className='max-w-[350px] md:max-w-[600px] lg:max-w-[800px] md:mx-4 my-2' />
             </div>
             <hr />
             <div className='flex justify-evenly'>
-                {love ? <button onClick={() => likeHandler(like)} >
-                    <div className='flex items-center gap-1'>
-                        <div>
-                            <AiOutlineHeart className='text-3xl text-red-600' />
-                        </div>
-                        <div>{feed.like}</div>
-                    </div>
-                </button> :
-                    <button onClick={() => dislikeHandler(like)}>
-                        <div className='flex items-center gap-1'>
-                            <div>
-                                <AiFillHeart className='text-3xl text-red-600' />
-                            </div>
-                            <div>{feed.like}</div>
-                        </div>
-                    </button>}
+                {love ? <button onClick={() => likeHandler()} ><AiOutlineHeart className='text-3xl text-red-600' /></button> :
+                    <button onClick={() => setLove(!love)}><AiFillHeart className='text-3xl text-red-600' /></button>}
 
                 <button onClick={() => setComment(!comment)}><FaRegComment className='text-2xl' /></button>
             </div>
             <div>
                 <h1 className='mx-2'>Comments</h1>
-                {feed?.comment?.map((c, i) =>
-                    <div key={i} className='border m-2 bg-slate-100 max-w-3xl rounded-lg'>
+                {feed?.comment?.map(c =>
+                    <div className='border m-2 bg-slate-100 max-w-3xl rounded-lg'>
                         <div className='flex justify-start items-center'>
                             <div className="avatar">
                                 <div className="w-8 rounded-full mx-4 my-4">
@@ -173,4 +131,4 @@ const FeedElement = ({ feed, react, setReact }) => {
     );
 };
 
-export default FeedElement;
+export default PostDetails;

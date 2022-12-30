@@ -12,7 +12,7 @@ const Post = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users?email=${user.email}`)
+        fetch(`https://know-me-server.vercel.app/users?email=${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setUserInfo(data)
@@ -48,7 +48,7 @@ const Post = () => {
                         photo: photo,
                         comment: []
                     }
-                    fetch(`http://localhost:5000/post`, {
+                    fetch(`https://know-me-server.vercel.app/post`, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
@@ -69,7 +69,6 @@ const Post = () => {
 
         }
         else {
-            console.log("no photo");
             const post = {
                 name: userInfo.name,
                 email: userInfo.email,
@@ -79,7 +78,7 @@ const Post = () => {
                 comment: []
             }
 
-            fetch(`http://localhost:5000/post`, {
+            fetch(`https://know-me-server.vercel.app/post`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

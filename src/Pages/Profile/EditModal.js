@@ -39,7 +39,7 @@ const EditModal = ({ userInfo }) => {
                         relationshipStatus: relationshipStatus,
                         profilePicture: photoURL
                     }
-                    fetch(`http://localhost:5000/users?email=${userInfo.email}`, {
+                    fetch(`https://know-me-server.vercel.app/users?email=${userInfo.email}`, {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json'
@@ -66,7 +66,7 @@ const EditModal = ({ userInfo }) => {
                 relationshipStatus: relationshipStatus,
                 profilePicture: profilePicture
             }
-            fetch(`http://localhost:5000/users?email=${userInfo.email}`, {
+            fetch(`https://know-me-server.vercel.app/users?email=${userInfo.email}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'

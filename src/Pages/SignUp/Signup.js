@@ -1,19 +1,24 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc'
 import { Player } from '@lottiefiles/react-lottie-player';
 import { AuthContext } from '../../Context/AuthProvider';
 import Loading from '../Loading/Loading';
 import { toast } from 'react-hot-toast';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 
 const Signup = () => {
 
     const { createUser, updateUser, providerLogin } = useContext(AuthContext)
+    const googleProvider = new GoogleAuthProvider()
+    const [signInError, setSignInError] = useState("")
     const [page1, setPage1] = useState(true)
     const [loading, setIsLoading] = useState(false)
     const navigate = useNavigate()
-    const imageHostKey = process.env.REACT_APP_imagebb_key
+    const imageHostKey = process.env.REACT_APP_imagebb_key;
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/';
 
 
     const handleOnSubmit = event => {
@@ -66,7 +71,7 @@ const Signup = () => {
                 profilePicture: photoURL
             }
 
-            fetch('http://localhost:5000/users', {
+            fetch('https://know-me-server.vercel.app/users', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -81,8 +86,48 @@ const Signup = () => {
                 })
         }
 
-
     };
+
+    const handleGoogleLogin = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                const name = user.displayName;
+                const email = user.email;
+                const profilePicture = user.photoURL;
+
+                saveGUser(name, email, profilePicture)
+                setSignInError('');
+                toast.success("User created successfully")
+                navigate(from, { replace: true });
+
+            })
+            .catch(error => {
+                console.error('Error', error);
+                setSignInError(error.message);
+            });
+    }
+
+    const saveGUser = (name, email, profilePicture) => {
+        const user = {
+            name: name,
+            email: email,
+            profilePicture: profilePicture
+        }
+
+        fetch('https://know-me-server.vercel.app/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                toast.success("Login successful")
+                navigate('/')
+            })
+    }
 
     if (loading) {
         return <Loading />
@@ -140,7 +185,7 @@ const Signup = () => {
                                     </div>
                                     <div className="divider">OR</div>
                                     <div className="form-control mt-1">
-                                        <button type='submit' className="btn bg-white text-orange-400"><FcGoogle className='text-2xl mr-2' />  Sign in with Google</button>
+                                        <button onClick={handleGoogleLogin} className="btn bg-white text-orange-400"><FcGoogle className='text-2xl mr-2' />  Sign in with Google</button>
                                     </div>
                                 </div>
                             </div>
@@ -203,6 +248,9 @@ const Signup = () => {
                             <input type="file" name="coverPhoto"
 
                                 className="input w-full max-w-xs" />
+                        </div>
+                        <div>
+                            <h1 className='text-red-500'>{signInError}</h1>
                         </div>
                         <div className="form-control mt-6">
                             <button onClick={() => setPage1(!page1)} className="btn btn-primary">Previous</button>

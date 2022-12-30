@@ -62,7 +62,7 @@ const Login = () => {
             profilePicture: profilePicture
         }
 
-        fetch('http://localhost:5000/users', {
+        fetch('https://know-me-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
